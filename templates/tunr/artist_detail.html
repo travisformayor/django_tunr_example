@@ -1,4 +1,4 @@
-{% extends 'tunr/base.html' %}
+{% extends 'base.html' %}
 
 {% block content %}
 <h2>{{ artist.name }} <a href="{% url 'artist_edit' pk=artist.pk %}">(edit)</a><a href="{% url 'artist_delete' pk=artist.pk %}">(-)</a></h2>

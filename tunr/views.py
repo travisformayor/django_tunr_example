@@ -2,6 +2,7 @@
 from django.shortcuts import render, redirect
 from .models import Artist, Song
 from .forms import ArtistForm, SongForm
+from django.contrib.auth.decorators import login_required
 
 # Create your views here
 def artist_list(request):
@@ -12,11 +13,14 @@ def artist_detail(request, pk): # pk - primary key
   artist = Artist.objects.get(id=pk)
   return render(request, 'tunr/artist_detail.html', {'artist': artist})
 
+@login_required
 def artist_create(request):
   if request.method == 'POST':
     form = ArtistForm(request.POST)
     if form.is_valid():
-      artist = form.save()
+      artist = form.save(commit=False)
+      artist.user = request.user
+      artist.save()
       return redirect('artist_detail', pk=artist.pk)
   else:
     form = ArtistForm()
