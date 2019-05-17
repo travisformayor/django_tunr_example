@@ -49,11 +49,14 @@ def song_detail(request, pk): # pk - primary key
   song = Song.objects.get(id=pk)
   return render(request, 'tunr/song_detail.html', {'song': song})
 
-def song_create(request):
+def song_create(request, pk):
+  artist = Artist.objects.get(pk=pk)
   if request.method == 'POST':
     form = SongForm(request.POST)
     if form.is_valid():
-      song = form.save()
+      song = form.save(commit=False)
+      song.artist = artist
+      song.save()
       return redirect('song_detail', pk=song.pk)
   else:
     form = SongForm()

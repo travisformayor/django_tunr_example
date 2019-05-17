@@ -9,4 +9,4 @@ class ArtistForm(forms.ModelForm):
 class SongForm(forms.ModelForm):
   class Meta: # Meta class contains info that isn't specific to one instance, but instead all versions of that form
     model = Song
-    fields = ('title', 'artist','preview_url', 'album')
+    fields = ('title', 'preview_url', 'album')

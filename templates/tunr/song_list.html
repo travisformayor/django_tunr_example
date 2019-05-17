@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h2>Songs <a href="{% url 'song_create' %}">(+)</a></h2>
+<h2>Songs</h2>
 <ul>
     {% for song in songs %}
         <li>
